@@ -43,10 +43,13 @@
 // const removedElements = hobbies.splice(-2, 1);
 // console.log(hobbies);
 
-const testResults = [1, 5.3, 1.5, 10.99, -5, 10];
+const testResults = [1, 5.3, 1.5, 10.99, 1,5, -5, 10];
 // const storedResults = testResults.slice(2);
 const storedResults = testResults.concat( [3.99, 2] ); // unlike push(), concat() will add new element/s to the existing array and will also return a brand new array with parameters if added
 
 testResults.push(5.91);
 
-console.log(storedResults, testResults);
+console.log(storedResults, testResults.indexOf(1.5)); // indexof() show desired index of value in array DO NOT WORK FOR OBJECT because objects are refferences(two objects are never same)
+
+const personData = [{name: "Manuel"}, {name: "Max"}];
+console.log(personData.indexOf({name: "Manuel"}));
