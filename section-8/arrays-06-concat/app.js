@@ -53,3 +53,14 @@ console.log(storedResults, testResults.indexOf(1.5)); // indexof() show desired 
 
 const personData = [{name: "Manuel"}, {name: "Max"}];
 console.log(personData.indexOf({name: "Manuel"})); // indexOf() will not work on objects
+
+const maxIndex = personData.find((person, idx, persons) => { // find() will search elements in array and when it finds it will immediately stop. will not make a copy of element because we work with same object
+    return person.name === "Max";                            // accept up to three arguments
+});
+
+const max = personData.findIndex((person, idx, persons) => {
+    return person.name === "Max";
+});
+
+console.log(maxIndex);
+console.log(max);
