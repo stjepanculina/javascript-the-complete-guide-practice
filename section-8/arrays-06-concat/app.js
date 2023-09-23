@@ -49,7 +49,3 @@ const storedResults = testResults.concat( [3.99, 2] ); // unlike push(), concat(
 
 testResults.push(5.91);
 
-console.log(storedResults, testResults.indexOf(1.5)); // indexof() show desired index of value in array DO NOT WORK FOR OBJECT because objects are refferences(two objects are never same)
-
-const personData = [{name: "Manuel"}, {name: "Max"}];
-console.log(personData.indexOf({name: "Manuel"}));
