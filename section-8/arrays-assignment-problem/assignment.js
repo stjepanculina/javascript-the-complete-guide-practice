@@ -46,9 +46,11 @@ const findMax2 = (someArray) => {
   let minMax = [];
   const maxNum = Math.max(...someArray);
   const minNum = Math.min(...someArray);
-  minMax.push(maxNum, minNum);
+  minMax.push(minNum, maxNum);
   return minMax;
 };
 
-console.log({min, max} = findMax2(myArray));
+const [min, max] = findMax2(myArray); // returns two seperated constants
+console.log(min, max); 
+console.log(findMax2(myArray)); // returns as an array
 
