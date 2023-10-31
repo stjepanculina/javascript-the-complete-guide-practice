@@ -32,8 +32,8 @@ const findMax = (...someArray) => {
   return largestNumber; */
   let maxNum = someArray[0];
   for (const num of someArray) {
-    if(num > maxNum) {
-        maxNum = num;
+    if (num > maxNum) {
+      maxNum = num;
     }
   }
   return maxNum;
@@ -51,6 +51,18 @@ const findMax2 = (someArray) => {
 };
 
 const [min, max] = findMax2(myArray); // returns two seperated constants
-console.log(min, max); 
+console.log(min, max);
 console.log(findMax2(myArray)); // returns as an array
 
+// 4.  Create a list (and possibly some surrounding logic) where you ensure that NO duplicate values can be added. Use whichever approach seems appropriate to you.
+
+const mySet = new Set();
+
+mySet.add(10);
+mySet.add(-5);
+mySet.add(-5); // set will not accept duplicated elements only one element "-5"
+mySet.add(1);
+mySet.add(5);
+mySet.add(8, 7, 4, 4); // same here "4, 4". It will accept only one "4"
+
+console.log(mySet);
