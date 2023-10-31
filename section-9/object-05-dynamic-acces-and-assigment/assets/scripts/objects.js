@@ -4,10 +4,13 @@ console.log(movieList);
 movieList.style["background-color"] = "red"; // acessing a string in style property thanks to square brackets
 movieList.style.display = "block";
 
+const userChoosenKey = "level"; // 
+
 let person = {
   "first name": "Max",
   age: 30,
   hobbies: ["Sports", "Cooking"],
+  [userChoosenKey] : "...",  // javascript will search variable with that name and value of that variable and will set key name as variable value
   greet: function () {
     alert("Hi there!");
   },
@@ -24,8 +27,13 @@ person.isAdmin = true; // adding an object values
 
 delete person.greet; // deletes an object value and key value
 
+const keyName = "first name";
+
+console.log(person[keyName]); // dynamically access object key value. Dynamically means on run-time.
+
 console.log(person["first name"]); // with a square bracket we can access object key names wich are in named in primitive value string.
 
 console.log(person[1.5]); //  accessing key names with brackets wich value is type of number , there is no need for apostrophe. 
 
 console.log(person); // output will show an object and if that object has some number/s as key value it will show them in ascending order
+
