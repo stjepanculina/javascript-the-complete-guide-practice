@@ -23,7 +23,7 @@ const renderMovieHandler = (filter = "") => {
 
   filteredMovies.forEach((movie) => {
     const movieEl = document.createElement("li");
-    let text = movie.info.title + " - ";
+    let text = movie.info.title + " - "; // chaining method
     for (const key in movie.info) {
       // for in loops for each element in array movie
       if (key !== "title") {
@@ -50,7 +50,7 @@ const addMovieHandler = () => {
       title,
       [extraName]: extraValue,
     },
-    id: Math.random(),
+    id: Math.random().toString(),
   };
   movies.push(newMovie);
   renderMovieHandler();
