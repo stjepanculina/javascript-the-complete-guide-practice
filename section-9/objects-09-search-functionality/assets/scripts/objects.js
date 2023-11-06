@@ -1,69 +1,65 @@
-const addMovieBtn = document.getElementById("add-movie-btn");
-const searchBtn = document.getElementById("search-btn");
+const addMovieBtn = document.getElementById('add-movie-btn');
+const searchBtn = document.getElementById('search-btn');
 
 const movies = [];
 
-const renderMovies = (filter = "") => {
-  // we use default argument so searchFilterHandler can pass argument to renderMovie. if searchFilterHandler is not used empty string is passed to rendermovie function
-  const movieList = document.getElementById("movie-list");
+const renderMovies = (filter = '') => {
+  const movieList = document.getElementById('movie-list');
+
   if (movies.length === 0) {
-    movieList.classList.remove("visible");
+    movieList.classList.remove('visible');
     return;
   } else {
-    movieList.classList.add("visible");
+    movieList.classList.add('visible');
   }
+  movieList.innerHTML = '';
 
-  const filteredMovies = !filter // if filter is not truthy (fitler is empty string) then movies is passed to variable filteredMovies. if filter truthy then title from object newMovie in array movies is passed to variable filteredMovies
-    ? movies 
-    : movies.filter(movie => {
-        movie.info.title.includes(filter);
-      });
+  const filteredMovies = !filter
+    ? movies
+    : movies.filter(movie => movie.info.title.includes(filter));
 
-  movieList.innerHTML = "";
-
-  filteredMovies.forEach( movie => {
-    // depending on filteredMovies value
-    const movieEl = document.createElement("li");
-    let text = movie.info.title + " - "; // chaining method
+  filteredMovies.forEach(movie => {
+    const movieEl = document.createElement('li');
+    let text = movie.info.title + ' - ';
     for (const key in movie.info) {
-      // for in loops for each element in array movie
-      if (key !== "title") {
-        //  if it's not title proceed with code
-        text = text + `${key} : ${movie.info[key]}`; // outputting dynamic properties
+      if (key !== 'title') {
+        text = text + `${key}: ${movie.info[key]}`;
       }
     }
-    console.log(filteredMovies);
     movieEl.textContent = text;
-    movieList.appendChild(movieEl);
+    movieList.append(movieEl);
   });
 };
 
 const addMovieHandler = () => {
-  const title = document.getElementById("title").value;
-  const extraName = document.getElementById("extra-name").value;
-  const extraValue = document.getElementById("extra-value").value;
+  const title = document.getElementById('title').value;
+  const extraName = document.getElementById('extra-name').value;
+  const extraValue = document.getElementById('extra-value').value;
 
-  if (title === "" || extraName === "" || extraValue === "") {
+  if (
+    title.trim() === '' ||
+    extraName.trim() === '' ||
+    extraValue.trim() === ''
+  ) {
     return;
   }
 
   const newMovie = {
     info: {
       title,
-      [extraName]: extraValue,
+      [extraName]: extraValue
     },
-    id: Math.random().toString(),
+    id: Math.random()
   };
+
   movies.push(newMovie);
   renderMovies();
-  console.log(newMovie);
 };
 
-const searchFilterHandler = () => {
-  const filterTerm = document.getElementById("filter-title").value;
-  console.log(filterTerm)
+const searchMovieHandler = () => {
+  const filterTerm = document.getElementById('filter-title').value;
   renderMovies(filterTerm);
 };
 
-addMovieBtn.addEventListener("click", addMovieHandler);
-searchBtn.addEventListener("click", searchFilterHandler);
+addMovieBtn.addEventListener('click', addMovieHandler);
+searchBtn.addEventListener('click', searchMovieHandler);
