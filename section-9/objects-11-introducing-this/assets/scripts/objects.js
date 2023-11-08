@@ -17,26 +17,23 @@ const renderMovies = (filter = "") => {
   const filteredMovies = !filter
     ? movies
     : movies.filter((movie) => movie.info.title.includes(filter));
-  console.log(filteredMovies);
 
   filteredMovies.forEach((movie) => {
     const movieEl = document.createElement("li");
-    if ("info" in movie) {
-      // checks for property existance
+    if ('info' in movie) { // checks for property existance
       console.log(true);
     } else {
       console.log(false);
     }
-    if (movie.info === undefined) {
-      // also checks for property existance
+    if (movie.info === undefined) { // also checks for property existance
       console.log(true);
     } else {
       console.log(false);
     }
     const { info, ...otherProp } = movie; // object destructuring.right side of = is object we want to destruct,left side of = is key names we need(info). (...otherProp) => using rest operator to add other property besides info
     console.log(otherProp);
-   //  const { title: movieTitle } = info;  destructuring info object  and changing key name "title" to "movieTitle"
-    let text = movie.getFormatedTitle() + ' - '; // thanks to this keyword we can call a function ("getFormatedTitle") inside an object 
+    const { title: movieTitle } = info; // destructuring info object  and changing key name "title" to "movieTitle"
+    let text = movieTitle + " - ";
     for (const key in info) {
       if (key !== "title") {
         text = text + `${key}: ${info[key]}`;
@@ -66,12 +63,6 @@ const addMovieHandler = () => {
       [extraName]: extraValue,
     },
     id: Math.random(),
-/*     getFormatedTitle: function () { longer syntax
-      return this.info.title.toUpperCase(); // this keyword is refering to this object ("newMovie") 
-    }, */
-    getFormatedTitle() {
-      return this.info.title.toUpperCase();
-    }
   };
 
   movies.push(newMovie);
