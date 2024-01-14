@@ -1,26 +1,33 @@
 class Product {
-  title = 'DEFAULT'
+  title = "DEFAULT";
   imageUrl;
   price;
   description;
+
+  constructor(title, image, price, desc) {
+    this.title = title;
+    this.imageUrl = image;
+    this.price = price;
+    this.description = desc;
+  }
 }
 
-console.log(new Product())
+console.log(new Product());
 
 const productList = {
   products: [
-    {
-      title: "Steam Deck",
-      imageUrl: "https://i.pcmag.com/imagery/reviews/02en94vZRDlIFeB9IKuQAlI-20.fit_scale.size_1028x578.v1646419997.jpg",
-      price: "$560",
-      description: "512 GB storage Steam Deck",
-    },
-    {
-      title: "DualSense wireles controller",
-      imageUrl: "https://gmedia.playstation.com/is/image/SIEPDC/dualsense-sterling-silver-screenshot-01-en-04sep23?$1200px$",
-      price: "$1,580",
-      description: "Playstation 5 Controller, Model: CFI-ZCP1",
-    },
+    new Product(
+      "Steam Deck",
+      "https://i.pcmag.com/imagery/reviews/02en94vZRDlIFeB9IKuQAlI-20.fit_scale.size_1028x578.v1646419997.jpg",
+      "$560",
+      "512 GB storage Steam Deck"
+    ),
+    new Product(
+      "DualSense wireles controller",
+      "https://gmedia.playstation.com/is/image/SIEPDC/dualsense-sterling-silver-screenshot-01-en-04sep23?$1200px$",
+      "$1,580",
+      "Playstation 5 Controller, Model: CFI-ZCP1"
+    ),
   ],
   render() {
     const renderHook = document.getElementById("app");
