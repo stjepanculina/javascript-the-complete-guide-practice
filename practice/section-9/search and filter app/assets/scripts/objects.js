@@ -20,10 +20,12 @@ const getAndPushData = () => {
       extraValue.trim();
     }
     const movieData = {
-      title: titleInput.toUpperCase(),
-      name: extraName,
-      value: extraValue,
+      titleInput,
+      [extraName]: extraValue,
       id: Math.random(),
+      upperCase : function () {
+        return this.titleInput.toUpperCase();
+      }
     };
     movies.push(movieData);
     console.log(movieData, movies);
@@ -35,8 +37,8 @@ const getAndPushData = () => {
 const filterMovies = () => {
   const addfilterBtn = document.getElementById("filter-title").value.toUpperCase();
   // const inputText = addfilterBtn.toString();
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.includes(addfilterBtn)
+  let filteredMovies = movies.filter((movie =>
+    movie.title.includes(addfilterBtn))
   );
   movieList.classList.remove('visible');
   movieList.innerHTML = "";
@@ -49,12 +51,15 @@ const renderMovies = (movieInfo = "", filteredMovie) => {
     filteredMovie.forEach((element => {
       const li = document.createElement('li');
       movieList.append(li);
-      li.innerHTML = `${element.title} - ${element.name} ${element.value}`;
+      li.innerHTML = `${element.toUpperCase()} - ${element.extraName}`;
     }))
   } else {
     const li = document.createElement('li');
     movieList.append(li);
-    li.innerHTML = `${movieInfo.title} - ${movieInfo.name} ${movieInfo.value}`;
+    for(const key in movieInfo) {
+      li.innerHTML = `${movieInfo.upperCase()} - ${movieInfo[key]}`
+    }
+    
   }
 };
 
