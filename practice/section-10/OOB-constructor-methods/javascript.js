@@ -12,8 +12,8 @@ class Product {
   }
 }
 
-const productsList = {
-  products: [
+class ProductList {
+  product = [
     new Product(
       "Steam Deck LCD",
       "$399",
@@ -26,11 +26,14 @@ const productsList = {
       "Steam Controller! Designed by Valve made for you!",
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Steam_Controller_B.jpg/1024px-Steam_Controller_B.jpg"
     ),
-  ],
+  ];
+}
+
+class ProductItem {
   render() {
     const appEl = document.getElementById("app");
     const ulEl = document.createElement("ul");
-    for (const prod of this.products) {
+    for (const prod of this.product) {
       /* this keyword is an object(productsList) */
       const liEl = document.createElement("li");
       liEl.className = "list-el";
@@ -45,7 +48,14 @@ const productsList = {
       ulEl.append(liEl);
     }
     appEl.append(ulEl);
-  },
+  }
+}
+
+/* const productsList = {
+  render() {},
 };
 
-productsList.render();
+productsList.render(); */
+
+const productList = new ProductList();
+productList.render();
