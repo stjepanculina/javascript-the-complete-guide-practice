@@ -12,6 +12,28 @@ class Product {
   }
 }
 
+class ProductItem {
+  // responsible for rendering one item
+  constructor(product) {
+    // product parametar is prod argument from ProductList class -> render() -> for of...
+    this.product = product;
+  }
+
+  render() {
+    const liEl = document.createElement("li");
+    liEl.className = "list-el";
+    liEl.innerHTML = `
+ <img src="${this.product.image}" width="30%" alt="${this.product.title} " > 
+ <div> 
+ <h3> ${this.product.title} </h3>
+ <h4> Price: ${this.product.price} </h4>
+ <p>Description: ${this.product.description}</p>
+ </div>
+  `;
+    return liEl;
+  }
+}
+
 class ProductList {
   product = [
     new Product(
@@ -27,24 +49,13 @@ class ProductList {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Steam_Controller_B.jpg/1024px-Steam_Controller_B.jpg"
     ),
   ];
-}
-
-class ProductItem {
   render() {
     const appEl = document.getElementById("app");
     const ulEl = document.createElement("ul");
     for (const prod of this.product) {
       /* this keyword is an object(productsList) */
-      const liEl = document.createElement("li");
-      liEl.className = "list-el";
-      liEl.innerHTML = `
-     <img src="${prod.image}" width="30%" alt="${prod.title} " > 
-     <div> 
-     <h3> ${prod.title} </h3>
-     <h4> Price: ${prod.price} </h4>
-     <p>Description: ${prod.description}</p>
-     </div>
-      `;
+      const productItem = new ProductItem(prod);
+      const liEl = productItem.render();
       ulEl.append(liEl);
     }
     appEl.append(ulEl);
