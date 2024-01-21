@@ -12,6 +12,20 @@ class Product {
   }
 }
 
+class Cart {
+  item = [];
+
+  render() {
+    const sectionEl = document.createElement("section");
+    sectionEl.innerHTML = `
+     <h2> Total price: \$ ${0} </h2>
+     <button> Buy Know </button>
+    `;
+    sectionEl.className = 'cart';
+    return sectionEl;
+  }
+}
+
 const productList = {
   products: [
     new Product(
@@ -46,7 +60,7 @@ class ProductItem {
   }
 
   addToCart() {
-    console.log('adding to cart...', this.product)
+    console.log("adding to cart...", this.product);
   }
 
   render() {
@@ -61,10 +75,19 @@ class ProductItem {
         <button> Add to Cart </button>
         </div>
     </div>`;
-    const addCartButton = prodEl.querySelector('button');
-    addCartButton.addEventListener('click', this.addToCart.bind(this));
+    const addCartButton = prodEl.querySelector("button");
+    addCartButton.addEventListener("click", this.addToCart.bind(this));
     return prodEl;
   }
+}
+
+class Shop {
+
+  render() {
+    const cart = new Cart();
+    cart.render();
+  }
+  
 }
 
 productList.render();
