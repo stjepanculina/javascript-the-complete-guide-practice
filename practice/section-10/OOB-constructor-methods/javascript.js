@@ -15,7 +15,7 @@ class Product {
 class ProductItem {
   // responsible for rendering one item
   constructor(product) {
-    // product parametar is prod argument from ProductList class -> render() -> for of...
+    // product parametar is prod argument from ProductList class -> render() -> for of... -> new ProductItem(prod)
     this.product = product;
   }
 
@@ -28,6 +28,7 @@ class ProductItem {
  <h3> ${this.product.title} </h3>
  <h4> Price: ${this.product.price} </h4>
  <p>Description: ${this.product.description}</p>
+ <button> Add to cart </button>
  </div>
   `;
     return liEl;
@@ -62,11 +63,7 @@ class ProductList {
   }
 }
 
-/* const productsList = {
-  render() {},
-};
 
-productsList.render(); */
 
 const productList = new ProductList();
 productList.render();
