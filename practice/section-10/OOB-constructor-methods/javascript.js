@@ -19,6 +19,11 @@ class ProductItem {
     this.product = product;
   }
 
+  addToCart() {
+    console.log('Adding product to cart...');
+    console.log(this.product);
+  }
+
   render() {
     const liEl = document.createElement("li");
     liEl.className = "list-el";
@@ -31,6 +36,8 @@ class ProductItem {
  <button> Add to cart </button>
  </div>
   `;
+  const addToCartButton = liEl.querySelector('button');
+  addToCartButton.addEventListener('click', this.addToCart.bind(this));
     return liEl;
   }
 }
@@ -51,19 +58,45 @@ class ProductList {
     ),
   ];
   render() {
-    const appEl = document.getElementById("app");
+    
     const ulEl = document.createElement("ul");
     for (const prod of this.product) {
       /* this keyword is an object(productsList) */
       const productItem = new ProductItem(prod);
+      console.log(productItem);
       const liEl = productItem.render();
       ulEl.append(liEl);
     }
-    appEl.append(ulEl);
+    return ulEl;
   }
 }
 
+class ShopingCart {
+  item = [];
 
+  render() {
+    const sectionEl = document.createElement("section");
+    sectionEl.innerHTML = `
+    <h2> Price: \$ ${0} <h2>
+    <button> Buy Now! </button>
+    `;
+    sectionEl.className = 'cart';
+    return sectionEl;
+  }
+}
 
-const productList = new ProductList();
-productList.render();
+class Shop {
+  render() {
+    const renderHook = document.getElementById("app");
+    const cart = new ShopingCart();
+    const cartEl = cart.render();
+    const productList = new ProductList();
+    const prodListEl = productList.render();
+
+    renderHook.append(cartEl);
+    renderHook.append(prodListEl);
+  }
+}
+
+const shop = new Shop();
+shop.render();

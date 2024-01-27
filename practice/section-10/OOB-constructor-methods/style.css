@@ -1,8 +1,27 @@
+body {
+    font-size: 16px;
+    font-family:'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    
+}
+
 .list-el{
     list-style: none;
     border-color: rgb(60, 73, 173);
     border-style:solid ;
     margin-left:auto;
 }
+
+
+.cart {
+    border-color: rgb(60, 73, 173);
+    border-width: 2px;
+    border-style: ridge;
+}
+
+.cart h2 {
+    font-size: 1.5em;
+}
+
 
 
