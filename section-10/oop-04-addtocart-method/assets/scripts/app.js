@@ -1,58 +1,37 @@
 class Product {
-  title = "DEFAULT";
-  imageUrl;
-  price;
-  description;
+  // title = 'DEFAULT';
+  // imageUrl;
+  // description;
+  // price;
 
-  constructor(title, imageUrl, price, description) {
+  constructor(title, image, desc, price) {
     this.title = title;
-    this.imageUrl = imageUrl;
+    this.imageUrl = image;
+    this.description = desc;
     this.price = price;
-    this.description = description;
   }
 }
 
-class Cart {
+class ShopingCart {
   item = [];
 
+
+addProduct(product) {
+  this.item.push(product);
+  this.totalOutput = `<h2> Total: \$${1} </h2>`
+
+}
   render() {
-    const sectionEl = document.createElement("section");
-    sectionEl.innerHTML = `
-     <h2> Total price: \$ ${0} </h2>
-     <button> Buy Know </button>
+    const shopingEl = document.createElement("section");
+    shopingEl.innerHTML = `
+    <h2> Total: \$${0} </h2>
+    <button> Buy Now! </button>
     `;
-    sectionEl.className = 'cart';
-    return sectionEl;
+    shopingEl.className = "cart";
+    this.totalOutput = shopingEl.querySelector('h2');
+    return shopingEl;
   }
 }
-
-const productList = {
-  products: [
-    new Product(
-      "Steam Deck",
-      "https://i.pcmag.com/imagery/reviews/02en94vZRDlIFeB9IKuQAlI-20.fit_scale.size_1028x578.v1646419997.jpg",
-      "$560",
-      "512 GB storage Steam Deck"
-    ),
-    new Product(
-      "DualSense wireles controller",
-      "https://gmedia.playstation.com/is/image/SIEPDC/dualsense-sterling-silver-screenshot-01-en-04sep23?$1200px$",
-      "$1,580",
-      "Playstation 5 Controller, Model: CFI-ZCP1"
-    ),
-  ],
-  render() {
-    const renderHook = document.getElementById("app");
-    const prodList = document.createElement("ul");
-    prodList.className = "product-list";
-    for (const prod of this.products) {
-      const productItem = new ProductItem(prod);
-      const prodEl = productItem.render();
-      prodList.append(prodEl);
-    }
-    renderHook.append(prodList);
-  },
-};
 
 class ProductItem {
   constructor(product) {
@@ -60,34 +39,75 @@ class ProductItem {
   }
 
   addToCart() {
-    console.log("adding to cart...", this.product);
+    console.log("Adding product to cart...");
+    console.log(this.product);
   }
 
   render() {
     const prodEl = document.createElement("li");
     prodEl.className = "product-item";
-    prodEl.innerHTML = `<div>
-        <img src="${this.product.imageUrl}" alt="${this.product.title}">
-        <div class="product-item_content">
-        <h2>${this.product.title} </h2>
-        <h3>\$${this.product.price} </h3>
-        <p>${this.product.description} </p>
-        <button> Add to Cart </button>
+    prodEl.innerHTML = `
+        <div>
+          <img src="${this.product.imageUrl}" alt="${this.product.title}" >
+          <div class="product-item__content">
+            <h2>${this.product.title}</h2>
+            <h3>\$${this.product.price}</h3>
+            <p>${this.product.description}</p>
+            <button>Add to Cart</button>
+          </div>
         </div>
-    </div>`;
+      `;
     const addCartButton = prodEl.querySelector("button");
     addCartButton.addEventListener("click", this.addToCart.bind(this));
     return prodEl;
   }
 }
 
-class Shop {
+class ProductList {
+  products = [
+    new Product(
+      "A Pillow",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Pillows_on_a_hotel_bed.jpg/1024px-Pillows_on_a_hotel_bed.jpg",
+      "A soft pillow!",
+      19.99
+    ),
+    new Product(
+      "A Carpet",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Ardabil_Carpet.jpg/397px-Ardabil_Carpet.jpg",
+      "A carpet which you might like - or not.",
+      89.99
+    ),
+  ];
+
+  constructor() {}
 
   render() {
-    const cart = new Cart();
-    cart.render();
+    const prodList = document.createElement("ul");
+    prodList.className = "product-list";
+    for (const prod of this.products) {
+      const productItem = new ProductItem(prod);
+      const prodEl = productItem.render();
+      prodList.append(prodEl);
+    }
+    return prodList;
   }
-  
 }
 
-productList.render();
+class Shop {
+  render() {
+    const renderHook = document.getElementById("app");
+    /* render ProductList */
+    const cart = new ProductList();
+    const cartEl = cart.render();
+    /* render ShopingCart */
+    const shopingCart = new ShopingCart();
+    const shopingEl = shopingCart.render();
+
+    renderHook.append(cartEl);
+    renderHook.append(prodList);
+  }
+}
+
+const shop = new Shop();
+console.log(shop),
+shop.render();
