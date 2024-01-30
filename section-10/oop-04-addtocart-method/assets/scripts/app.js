@@ -15,12 +15,10 @@ class Product {
 class ShopingCart {
   item = [];
 
-
-addProduct(product) {
-  this.item.push(product);
-  this.totalOutput = `<h2> Total: \$${1} </h2>`
-
-}
+  addProduct(product) { 
+    this.item.push(product);
+    this.totalOutput.innerHTML = `<h2> Total: \$${1} </h2>`;
+  }
   render() {
     const shopingEl = document.createElement("section");
     shopingEl.innerHTML = `
@@ -28,7 +26,7 @@ addProduct(product) {
     <button> Buy Now! </button>
     `;
     shopingEl.className = "cart";
-    this.totalOutput = shopingEl.querySelector('h2');
+    this.totalOutput = shopingEl.querySelector("h2");
     return shopingEl;
   }
 }
@@ -38,9 +36,8 @@ class ProductItem {
     this.product = product;
   }
 
-  addToCart() {
-    console.log("Adding product to cart...");
-    console.log(this.product);
+  addToCart() { 
+    App.addProductToCart(this.product); 
   }
 
   render() {
@@ -96,18 +93,31 @@ class ProductList {
 class Shop {
   render() {
     const renderHook = document.getElementById("app");
+    /* render ShopingCart */
+    this.shopingCart = new ShopingCart(); // shopingCart is now property of Shop class, now we can access this property from the App class
+    const shopingEl = this.shopingCart.render();
     /* render ProductList */
     const cart = new ProductList();
     const cartEl = cart.render();
-    /* render ShopingCart */
-    const shopingCart = new ShopingCart();
-    const shopingEl = shopingCart.render();
 
+    renderHook.append(shopingEl);
     renderHook.append(cartEl);
-    renderHook.append(prodList);
   }
 }
 
-const shop = new Shop();
-console.log(shop),
-shop.render();
+class App {
+  static shopingCart;
+
+  static init() {
+    const shop = new Shop();
+    shop.render();
+    this.shopingCart = shop.shopingCart; // storing property value from Shop class -> shopingCart, wich is using instance of ShopingCart class
+    console.log(this.shopingCart);
+  }
+  static addProductToCart(product) { 
+    this.shopingCart.addProduct(product);
+    
+  }
+}
+
+App.init();
